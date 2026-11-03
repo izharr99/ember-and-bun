@@ -1,0 +1,207 @@
+{
+  "brand": {
+    "name": "Ember & Bun",
+    "shortName": "E&B",
+    "tagline": "Smashed on fire. Stacked by hand.",
+    "description": "Ember & Bun is a fire-grill burger kitchen. Explore the menu, build your own burger and send your order on WhatsApp."
+  },
+  "theme": {
+    "bg": "#120c08",
+    "surface": "#1f1610",
+    "ink": "#fff4e3",
+    "muted": "#c9b49a",
+    "accent": "#ff5a1f",
+    "accent2": "#ffc23d",
+    "fontDisplay": "Anton",
+    "fontBody": "DM Sans"
+  },
+  "currency": {
+    "symbol": "Rs ",
+    "locale": "en-PK"
+  },
+  "whatsapp": {
+    "number": "923000000000",
+    "greeting": "Hi Ember & Bun! I'd like to order:",
+    "cta": "Send order on WhatsApp"
+  },
+  "nav": [
+    { "label": "Anatomy", "href": "#anatomy" },
+    { "label": "Build", "href": "#build" },
+    { "label": "Menu", "href": "#menu" },
+    { "label": "Visit", "href": "#visit" }
+  ],
+  "hero": {
+    "kicker": "Fire-grill burger kitchen",
+    "headline": ["SMASHED", "ON FIRE"],
+    "scrollHint": "Scroll to take it apart",
+    "outro": "Six layers. Zero shortcuts.",
+    "layers": [
+      { "type": "bunTop", "name": "Brioche Crown", "price": 120, "calories": 190, "note": "Butter toasted, sesame crusted" },
+      { "type": "sauce", "name": "Ember Sauce", "price": 60, "calories": 80, "note": "Smoked chilli, garlic, lime" },
+      { "type": "lettuce", "name": "Iceberg Crunch", "price": 40, "calories": 5, "note": "Cold, crisp, shredded to order" },
+      { "type": "cheese", "name": "Aged Cheddar", "price": 150, "calories": 110, "note": "Melted under a steel dome" },
+      { "type": "patty", "name": "Smash Patty", "price": 650, "calories": 320, "note": "Chuck and brisket, 160g" },
+      { "type": "bunBottom", "name": "Brioche Heel", "price": 80, "calories": 140, "note": "Griddled to soak the juices" }
+    ]
+  },
+  "anatomy": {
+    "kicker": "The anatomy",
+    "title": "Every layer earns its place."
+  },
+  "builder": {
+    "kicker": "Build your own",
+    "title": "Your stack. Your rules.",
+    "hint": "Tap an ingredient or drag it onto the bun.",
+    "basePrice": 200,
+    "baseCalories": 330,
+    "baseName": "Brioche bun",
+    "maxLayers": 10,
+    "itemName": "Custom Stack",
+    "finishLabel": "Close it up",
+    "resetLabel": "Start over",
+    "undoLabel": "Undo",
+    "addLabel": "Add to order",
+    "ingredients": [
+      { "type": "patty", "name": "Smash patty", "price": 650, "calories": 320 },
+      { "type": "cheese", "name": "Cheddar", "price": 150, "calories": 110 },
+      { "type": "bacon", "name": "Beef bacon", "price": 220, "calories": 140 },
+      { "type": "lettuce", "name": "Lettuce", "price": 40, "calories": 5 },
+      { "type": "tomato", "name": "Tomato", "price": 50, "calories": 10 },
+      { "type": "onion", "name": "Red onion", "price": 40, "calories": 15 },
+      { "type": "pickles", "name": "Pickles", "price": 50, "calories": 5 },
+      { "type": "sauce", "name": "Ember sauce", "price": 60, "calories": 80 }
+    ]
+  },
+  "menu": {
+    "kicker": "The menu",
+    "title": "Pick your poison.",
+    "addLabel": "Add to order",
+    "items": [
+      {
+        "id": "classic-smash",
+        "name": "Classic Smash",
+        "category": "Burgers",
+        "price": 1250,
+        "calories": 780,
+        "badge": "Bestseller",
+        "description": "Double smash patty, aged cheddar, pickles, red onion and Ember sauce in a toasted brioche.",
+        "image": "",
+        "art": { "kind": "burger", "layers": ["bunTop", "sauce", "pickles", "onion", "cheese", "patty", "cheese", "patty", "bunBottom"] }
+      },
+      {
+        "id": "bacon-blaze",
+        "name": "Bacon Blaze",
+        "category": "Burgers",
+        "price": 1490,
+        "calories": 910,
+        "badge": "Spicy",
+        "description": "Smash patty, crispy beef bacon, double cheddar and a heavy hand of smoked chilli sauce.",
+        "image": "",
+        "art": { "kind": "burger", "layers": ["bunTop", "sauce", "bacon", "cheese", "patty", "cheese", "bunBottom"] }
+      },
+      {
+        "id": "garden-stack",
+        "name": "Garden Stack",
+        "category": "Burgers",
+        "price": 1090,
+        "calories": 560,
+        "badge": "",
+        "description": "Single patty with crunchy lettuce, beefsteak tomato, red onion and pickles. The fresh one.",
+        "image": "",
+        "art": { "kind": "burger", "layers": ["bunTop", "lettuce", "tomato", "onion", "patty", "pickles", "bunBottom"] }
+      },
+      {
+        "id": "the-tower",
+        "name": "The Tower",
+        "category": "Burgers",
+        "price": 1990,
+        "calories": 1340,
+        "badge": "Challenge",
+        "description": "Triple patty, triple cheddar, bacon and everything we have. Finish it, get it on the wall.",
+        "image": "",
+        "art": { "kind": "burger", "layers": ["bunTop", "sauce", "lettuce", "bacon", "cheese", "patty", "cheese", "patty", "cheese", "patty", "bunBottom"] }
+      },
+      {
+        "id": "ember-fries",
+        "name": "Ember Fries",
+        "category": "Sides",
+        "price": 450,
+        "calories": 380,
+        "badge": "",
+        "description": "Skin-on fries, double fried, dusted in smoked paprika salt.",
+        "image": "",
+        "art": { "kind": "fries" }
+      },
+      {
+        "id": "onion-rings",
+        "name": "Onion Rings",
+        "category": "Sides",
+        "price": 490,
+        "calories": 410,
+        "badge": "",
+        "description": "Thick-cut onion rings in a crackling buttermilk batter.",
+        "image": "",
+        "art": { "kind": "rings" }
+      },
+      {
+        "id": "salted-caramel-shake",
+        "name": "Caramel Shake",
+        "category": "Drinks",
+        "price": 690,
+        "calories": 620,
+        "badge": "New",
+        "description": "Thick vanilla shake with burnt salted caramel and whipped cream.",
+        "image": "",
+        "art": { "kind": "shake" }
+      },
+      {
+        "id": "house-cola",
+        "name": "House Cola",
+        "category": "Drinks",
+        "price": 290,
+        "calories": 140,
+        "badge": "",
+        "description": "Ice cold, extra fizz, with a squeeze of lime.",
+        "image": "",
+        "art": { "kind": "soda" }
+      }
+    ]
+  },
+  "sizzle": {
+    "kicker": "The smash",
+    "lines": ["230°C", "STEEL.", "90 SECONDS."],
+    "copy": "Every patty is smashed thin onto screaming hot steel for a deep, lacy crust. No timers. Just sound and smell."
+  },
+  "reviews": [
+    { "quote": "Best smash burger in town. Not close.", "author": "Hamza R." },
+    { "quote": "The Ember sauce should be illegal.", "author": "Sana K." },
+    { "quote": "Built my own with three patties. No regrets.", "author": "Ali M." },
+    { "quote": "Ordered on WhatsApp, food arrived hot in 25 minutes.", "author": "Zara T." },
+    { "quote": "Those fries. That shake. Come on.", "author": "Usman F." },
+    { "quote": "Finally a burger that tastes like fire.", "author": "Mehak A." }
+  ],
+  "location": {
+    "kicker": "Come hungry",
+    "headline": ["OPEN", "TILL 2AM"],
+    "address": "14 Ember Lane, Food Street",
+    "city": "Your City",
+    "mapUrl": "https://maps.google.com/?q=Food+Street",
+    "phone": "+92 300 0000000",
+    "hours": [
+      { "days": "Mon to Thu", "time": "12:00 to 00:00" },
+      { "days": "Fri to Sat", "time": "12:00 to 02:00" },
+      { "days": "Sunday", "time": "13:00 to 23:00" }
+    ]
+  },
+  "cart": {
+    "title": "Your order",
+    "empty": "Nothing here yet. Go stack something.",
+    "nameLabel": "Your name",
+    "notesLabel": "Address or notes",
+    "totalLabel": "Total",
+    "clearLabel": "Clear"
+  },
+  "footer": {
+    "note": "A free ScrollCraft template. Fictional restaurant, real code."
+  }
+}
