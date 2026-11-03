@@ -2,7 +2,7 @@
 
 A free, scroll-driven website template for a burger restaurant. The page plays like one continuous story: scroll is the playhead, type is huge, and every section moves.
 
-**Live demo:** LIVE_URL
+**Live demo:** https://scrollcraft-burger.vercel.app
 
 Built with Vite, TypeScript (vanilla), GSAP + ScrollTrigger and Lenis. No backend, no API keys, no images to license: every burger layer, side and drink is a hand-built SVG illustration, so the whole site ships in about 70 KB of gzipped JS and CSS.
 
