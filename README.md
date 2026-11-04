@@ -1,8 +1,8 @@
-# ScrollCraft Burger
+# Ember & Bun: Burger Restaurant Template
 
 A free, scroll-driven website template for a burger restaurant, styled as a loud street-food zine: mustard, ketchup and pickle colours, thick ink outlines, halftone dots, starburst stickers, marquee tape and torn paper edges, all wrapped around real food photography. Scroll is the playhead and everything bounces.
 
-**Live demo:** https://scrollcraft-burger.vercel.app
+**Live demo:** https://emberandbun.izhar.dev
 
 Built with Vite, TypeScript (vanilla), GSAP + ScrollTrigger and Lenis. No backend, no API keys. All photos are free-licensed, compressed to WebP and total under 1 MB.
 

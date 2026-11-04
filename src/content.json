@@ -320,7 +320,7 @@
     "clearLabel": "Clear"
   },
   "footer": {
-    "note": "A free ScrollCraft template. Fictional restaurant, real code."
+    "note": "A free website template. Fictional restaurant, real code."
   },
   "loader": {
     "label": "Stacking your burger",
@@ -337,11 +337,11 @@
     "prefix": "Designed & built by",
     "author": "Muhammad Izhar",
     "url": "https://izhar.dev",
-    "repo": "https://github.com/izharr99/scrollcraft-burger",
+    "repo": "https://github.com/izharr99/ember-and-bun",
     "repoLabel": "Get this template",
     "license": "MIT license",
-    "licenseUrl": "https://github.com/izharr99/scrollcraft-burger/blob/main/LICENSE",
+    "licenseUrl": "https://github.com/izharr99/ember-and-bun/blob/main/LICENSE",
     "photoCredits": "Photo credits",
-    "photoCreditsUrl": "https://github.com/izharr99/scrollcraft-burger#credits"
+    "photoCreditsUrl": "https://github.com/izharr99/ember-and-bun#credits"
   }
 }
