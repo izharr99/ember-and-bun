@@ -1,13 +1,11 @@
 import { content, type MenuItem } from '../types';
-import { itemArt } from '../art/items';
 import { esc, html, money, qs, reducedMotion } from '../lib/util';
 import { gsap, lockScroll, ScrollTrigger } from '../lib/motion';
 import { addToCart, flyToCart } from '../cart';
 
+/** Menu photo, framed like a pasted-in zine clipping (tape and halftone come from CSS). */
 const artFor = (item: MenuItem): string =>
-  item.image
-    ? `<img src="${esc(item.image)}" alt="${esc(item.name)}" loading="lazy" decoding="async" width="600" height="600">`
-    : itemArt(item.art, esc(item.name));
+  `<img src="${esc(item.image)}" alt="${esc(item.name)}" loading="lazy" decoding="async" width="900" height="900" draggable="false">`;
 
 /**
  * Menu as a horizontal rail. The section pins and vertical scroll drives the track
@@ -17,17 +15,20 @@ export function menuSection(): HTMLElement {
   const m = content.menu;
   return html(`
     <section class="menu" id="menu" aria-labelledby="menu-title">
+      <svg class="drip-wipe" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 0h1200v40c-30 0-30 70-60 70s-24-58-54-58-20 96-56 96-26-80-60-80-30 40-62 40-24-60-56-60-30 110-66 110-30-92-64-92-26 46-58 46-28-70-62-70-24 52-56 52-34-84-66-84-28 120-64 120-30-104-62-104-28 52-58 52-30-74-62-74-26 38-56 38-32-58-64-58-30 86-62 86-26-78-60-78V0Z" fill="var(--builder-bg)" stroke="var(--ink)" stroke-width="5" vector-effect="non-scaling-stroke"/>
+      </svg>
       <div class="menu-pin">
         <div class="menu-head">
           <p class="kicker">${esc(m.kicker)}</p>
-          <h2 class="display" id="menu-title">${esc(m.title)}</h2>
+          <h2 class="display split" id="menu-title">${esc(m.title)}</h2>
         </div>
         <div class="menu-viewport">
           <ul class="menu-track">
             ${m.items
               .map(
                 (item, i) => `
-              <li class="menu-card" style="--n:${i}">
+              <li class="menu-card" style="--tilt:${i % 2 ? 2.5 : -2}deg">
                 <button class="menu-open" type="button" data-id="${esc(item.id)}" aria-haspopup="dialog">
                   <span class="menu-cat">${esc(item.category)}</span>
                   ${item.badge ? `<span class="badge">${esc(item.badge)}</span>` : ''}
@@ -90,15 +91,43 @@ export function initMenu(root: HTMLElement): void {
         onUpdate: (st) => gsap.set('.menu-progress span', { scaleX: st.progress }),
       },
     });
-    // Cards tilt with scroll velocity for a physical, hanging-on-a-rail feel.
-    const tilt = gsap.quickTo('.menu-card', 'rotation', { duration: 0.6, ease: 'power3' });
+    // The whole rail skews with scroll velocity, like stickers flapping on a moving truck.
+    const skew = gsap.quickTo('.menu-card', 'skewX', { duration: 0.5, ease: 'power3' });
     ScrollTrigger.create({
       trigger: root,
       start: 'top bottom',
       end: 'bottom top',
-      onUpdate: (st) => tilt(gsap.utils.clamp(-3, 3, st.getVelocity() / -600)),
-      onLeave: () => tilt(0),
+      onUpdate: (st) => skew(gsap.utils.clamp(-10, 10, st.getVelocity() / -250)),
+      onLeave: () => skew(0),
+      onLeaveBack: () => skew(0),
     });
+    // Sauce drips run down from the section above as the menu arrives.
+    gsap.fromTo(
+      '.drip-wipe',
+      { scaleY: 0.25 },
+      { scaleY: 1, ease: 'none', scrollTrigger: { trigger: root, start: 'top bottom', end: 'top top', scrub: 0.5 } },
+    );
+    // 3D tilt + jiggle on hover (mouse only).
+    if (window.matchMedia('(hover: hover)').matches) {
+      gsap.utils.toArray<HTMLElement>('.menu-open', root).forEach((card) => {
+        const rx = gsap.quickTo(card, 'rotationX', { duration: 0.5, ease: 'power3' });
+        const ry = gsap.quickTo(card, 'rotationY', { duration: 0.5, ease: 'power3' });
+        const art = qs('.menu-art', card);
+        gsap.set(card, { transformPerspective: 700 });
+        card.addEventListener('pointerenter', () => {
+          gsap.fromTo(art, { scale: 1 }, { keyframes: { scale: [1.18, 0.94, 1.08, 1], rotation: [0, -6, 4, 0] }, duration: 0.7, ease: 'none' });
+        });
+        card.addEventListener('pointermove', (e) => {
+          const r = card.getBoundingClientRect();
+          ry(((e.clientX - r.left) / r.width - 0.5) * 22);
+          rx(-((e.clientY - r.top) / r.height - 0.5) * 22);
+        });
+        card.addEventListener('pointerleave', () => {
+          rx(0);
+          ry(0);
+        });
+      });
+    }
   } else {
     root.classList.add('is-static');
   }
@@ -152,19 +181,13 @@ export function initMenu(root: HTMLElement): void {
     origin = `${r.left + r.width / 2}px ${r.top + r.height / 2}px`;
     gsap.set(source, { autoAlpha: 0 });
     const tl = gsap.timeline();
-    tl.fromTo(bg, { clipPath: `circle(0% at ${origin})` }, { clipPath: `circle(150% at ${origin})`, duration: 0.8, ease: 'expo.inOut' }, 0)
-      .from(artBox, { ...flipFrom(source), duration: 0.9, ease: 'expo.inOut' }, 0)
-      .from(copy.children, { autoAlpha: 0, y: 40, stagger: 0.06, duration: 0.6, ease: 'power3.out' }, 0.45);
+    tl.fromTo(bg, { clipPath: `circle(0% at ${origin})` }, { clipPath: `circle(150% at ${origin})`, duration: 0.7, ease: 'power3.inOut' }, 0)
+      .from(artBox, { ...flipFrom(source), rotation: -12, duration: 0.9, ease: 'back.out(1.5)' }, 0)
+      .from(copy.children, { autoAlpha: 0, y: 60, rotation: () => gsap.utils.random(-10, 10), stagger: 0.06, duration: 0.7, ease: 'back.out(2.5)' }, 0.35);
 
-    // Burgers gently separate in the detail view so you can read the layers.
-    const groups = gsap.utils.toArray<SVGGElement>('.art-layer > g', artBox);
-    float = gsap.timeline({ delay: 0.8, repeat: -1, yoyo: true, defaults: { ease: 'sine.inOut', duration: 2.2 } });
-    if (groups.length) {
-      const mid = (groups.length - 1) / 2;
-      groups.forEach((g, i) => float!.to(g, { y: (i - mid) * 9 }, 0));
-    } else {
-      float.to(artBox.querySelector('.art-side'), { y: -12, rotation: 3, svgOrigin: '200 200' }, 0);
-    }
+    // The photo keeps bobbing like a sticker on a dashboard.
+    float = gsap.timeline({ delay: 0.9, repeat: -1, yoyo: true, defaults: { ease: 'sine.inOut', duration: 1.8 } });
+    float.to(artBox.firstElementChild, { y: -14, rotation: 3 }, 0);
   };
 
   const close = () => {
@@ -184,9 +207,9 @@ export function initMenu(root: HTMLElement): void {
     gsap
       .timeline({ onComplete: done })
       .to(copy.children, { autoAlpha: 0, y: 20, duration: 0.25, stagger: 0.03 }, 0)
-      .to(artBox.querySelectorAll('.art-layer > g'), { y: 0, duration: 0.4 }, 0)
-      .to(artBox, { ...flipFrom(source), duration: 0.7, ease: 'expo.inOut' }, 0.1)
-      .to(bg, { clipPath: `circle(0% at ${origin})`, duration: 0.6, ease: 'expo.inOut' }, 0.2);
+      .to(artBox.firstElementChild, { y: 0, rotation: 0, duration: 0.3 }, 0)
+      .to(artBox, { ...flipFrom(source), duration: 0.6, ease: 'back.in(1.2)' }, 0.1)
+      .to(bg, { clipPath: `circle(0% at ${origin})`, duration: 0.55, ease: 'power3.inOut' }, 0.2);
   };
 
   track.addEventListener('click', (e) => {

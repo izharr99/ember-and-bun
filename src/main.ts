@@ -1,8 +1,10 @@
 import './styles.css';
 import { content } from './types';
-import { DEFS } from './art/layers';
 import { initSmoothScroll, ScrollTrigger } from './lib/motion';
 import { initCart } from './cart';
+import { playIntro } from './fx/loader';
+import { initCursor } from './fx/cursor';
+import { initWobble } from './fx/split';
 import { heroSection, initHero } from './sections/hero';
 import { builderSection, initBuilder } from './sections/builder';
 import { initMenu, menuSection } from './sections/menu';
@@ -12,29 +14,30 @@ import {
   initReveals,
   initReviews,
   initSizzle,
+  initTapes,
   locationSection,
   navBar,
   reviewsSection,
   sizzleSection,
+  tapeStrip,
 } from './sections/extras';
 
 /** Theme tokens come from content.json so a rebrand never touches CSS. */
 function applyTheme(): void {
   const t = content.theme;
   const root = document.documentElement.style;
-  root.setProperty('--bg', t.bg);
-  root.setProperty('--surface', t.surface);
+  root.setProperty('--paper', t.paper);
   root.setProperty('--ink', t.ink);
-  root.setProperty('--muted', t.muted);
-  root.setProperty('--accent', t.accent);
-  root.setProperty('--accent-2', t.accent2);
-  root.setProperty('--font-display', `"${t.fontDisplay}", Impact, "Arial Narrow", sans-serif`);
+  root.setProperty('--ketchup', t.ketchup);
+  root.setProperty('--mustard', t.mustard);
+  root.setProperty('--pickle', t.pickle);
+  root.setProperty('--pink', t.pink);
+  root.setProperty('--font-display', `"${t.fontDisplay}", Impact, sans-serif`);
   root.setProperty('--font-body', `"${t.fontBody}", system-ui, sans-serif`);
 }
 
 function mount(): void {
   applyTheme();
-  document.body.insertAdjacentHTML('afterbegin', DEFS);
 
   const app = document.getElementById('app')!;
   const hero = heroSection();
@@ -44,17 +47,21 @@ function mount(): void {
   const reviews = reviewsSection();
   const visit = locationSection();
   app.before(navBar());
-  app.append(hero, sizzle, builder, menu, reviews, visit);
+  app.append(hero, tapeStrip(-3), sizzle, builder, menu, tapeStrip(2, true), reviews, visit);
   app.after(footerSection());
 
   initSmoothScroll();
+  const ready = playIntro();
   initCart();
-  initHero(hero);
+  initCursor();
+  initWobble();
+  initHero(hero, ready);
   initSizzle(sizzle);
   initBuilder(builder);
   initMenu(menu);
   initReviews(reviews);
   initLocation(visit);
+  initTapes();
   initReveals();
 
   // Web fonts change text metrics; recalculate pin distances once they land.

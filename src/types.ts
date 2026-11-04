@@ -12,10 +12,6 @@ export type LayerType =
   | 'bacon'
   | 'sauce';
 
-export type ItemArt =
-  | { kind: 'burger'; layers: LayerType[] }
-  | { kind: 'fries' | 'rings' | 'shake' | 'soda' };
-
 export interface HeroLayer {
   type: LayerType;
   name: string;
@@ -39,23 +35,24 @@ export interface MenuItem {
   calories: number;
   badge: string;
   description: string;
-  /** Optional path to an image in /public. When empty, the illustrated `art` is used. */
+  /** Path to a photo in /public, ideally around 900px wide WebP. */
   image: string;
-  art: ItemArt;
 }
 
 export interface Content {
   brand: { name: string; shortName: string; tagline: string; description: string };
   theme: {
-    bg: string;
-    surface: string;
+    paper: string;
     ink: string;
-    muted: string;
-    accent: string;
-    accent2: string;
+    ketchup: string;
+    mustard: string;
+    pickle: string;
+    pink: string;
     fontDisplay: string;
     fontBody: string;
   };
+  loader: { label: string; skip: string };
+  tape: string[];
   currency: { symbol: string; locale: string };
   whatsapp: { number: string; greeting: string; cta: string };
   nav: { label: string; href: string }[];
@@ -64,6 +61,7 @@ export interface Content {
     headline: string[];
     scrollHint: string;
     outro: string;
+    sticker: string;
     layers: HeroLayer[];
   };
   anatomy: { kicker: string; title: string };
@@ -80,10 +78,12 @@ export interface Content {
     resetLabel: string;
     undoLabel: string;
     addLabel: string;
+    chompLabel: string;
+    closedLabel: string;
     ingredients: Ingredient[];
   };
   menu: { kicker: string; title: string; addLabel: string; items: MenuItem[] };
-  sizzle: { kicker: string; lines: string[]; copy: string };
+  sizzle: { kicker: string; lines: string[]; copy: string; sound: string; image: string; imageAlt: string };
   reviews: { quote: string; author: string }[];
   location: {
     kicker: string;
@@ -92,6 +92,8 @@ export interface Content {
     city: string;
     mapUrl: string;
     phone: string;
+    image: string;
+    imageAlt: string;
     hours: { days: string; time: string }[];
   };
   cart: {
