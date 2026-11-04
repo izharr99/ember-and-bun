@@ -5,9 +5,10 @@ const ESC: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"
 /** Escape a content string before interpolating it into HTML. */
 export const esc = (value: string | number): string => String(value).replace(/[&<>"']/g, (c) => ESC[c]);
 
-const numberFormat = new Intl.NumberFormat(content.currency.locale);
+const currencyFormat = new Intl.NumberFormat(content.currency.locale, { style: 'currency', currency: content.currency.code });
 
-export const money = (value: number): string => `${content.currency.symbol}${numberFormat.format(value)}`;
+/** Format a price, e.g. 12.5 -> "$12.50" for en-US / USD. */
+export const money = (value: number): string => currencyFormat.format(Math.round(value * 100) / 100);
 
 export const reducedMotion = (): boolean => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

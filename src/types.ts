@@ -53,7 +53,7 @@ export interface Content {
   };
   loader: { label: string; skip: string };
   tape: string[];
-  currency: { symbol: string; locale: string };
+  currency: { code: string; locale: string };
   whatsapp: { number: string; greeting: string; cta: string };
   nav: { label: string; href: string }[];
   hero: {
@@ -105,6 +105,17 @@ export interface Content {
     clearLabel: string;
   };
   footer: { note: string };
+  credits: {
+    prefix: string;
+    author: string;
+    url: string;
+    repo: string;
+    repoLabel: string;
+    license: string;
+    licenseUrl: string;
+    photoCredits: string;
+    photoCreditsUrl: string;
+  };
 }
 
 export const content = raw as unknown as Content;

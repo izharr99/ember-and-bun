@@ -26,12 +26,13 @@ Everything a restaurant would change lives in **`src/content.json`**:
 | --- | --- |
 | `brand` | Name, tagline, description (also used for `<title>` and meta tags) |
 | `theme` | Colours and the two Google Fonts (the font link is generated at build time) |
-| `currency` | Symbol and number locale, e.g. `"Rs "` + `en-PK` or `"$"` + `en-US` |
+| `currency` | ISO currency code and locale for price formatting, e.g. `USD` + `en-US` ($12.50) or `EUR` + `de-DE` |
 | `whatsapp` | Order number in international format without `+`, greeting and button label |
 | `hero.layers` | The exploded burger, top to bottom: layer `type`, name, note, price, calories |
 | `builder` | Base bun price and calories, max layers, labels, and the ingredient list |
 | `menu.items` | Menu cards: name, category, price, calories, badge, description and `image` (a photo in `public/`) |
 | `sizzle`, `reviews`, `location`, `cart`, `footer` | Copy for the remaining sections |
+| `credits` | Footer credit (author name and link), "Get this template" repo link, licence and photo credits links |
 
 **Layer types** available for the hero and builder: `bunTop`, `bunBottom`, `patty`, `cheese`, `lettuce`, `tomato`, `onion`, `pickles`, `bacon`, `sauce`. Each is a transparent WebP in `public/img/layers/` that shares one horizontal scale (900 px wide, the bun spans the full width), so any combination stacks into a believable burger. `src/art/layers.ts` holds each layer's height, how far its far edge rises behind the layer above (`up`) and its thickness (`t`). To swap in your own photos, export cut-outs at the same width and adjust those three numbers.
 
@@ -87,7 +88,8 @@ All photos come from Wikimedia Commons under licences that allow free commercial
 
 - Fonts: [Bowlby One](https://fonts.google.com/specimen/Bowlby+One) and [Bricolage Grotesque](https://fonts.google.com/specimen/Bricolage+Grotesque) via Google Fonts (SIL Open Font License).
 - Libraries: [GSAP](https://gsap.com) (free standard license), [Lenis](https://github.com/darkroomengineering/lenis) (MIT), [Vite](https://vitejs.dev) (MIT).
-- Ember & Bun is a fictional restaurant. The phone number and address are placeholders.
+- Ember & Bun is a fictional restaurant. The address is made up and the phone and WhatsApp numbers use the fictional 555-01xx range.
+- Designed and built by [Muhammad Izhar](https://izhar.dev).
 
 ## License
 

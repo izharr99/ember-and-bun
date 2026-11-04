@@ -1861,7 +1861,7 @@ html.has-cursor textarea {
 }
 .footer-brand {
   font-family: var(--font-display);
-  font-size: clamp(48px, 12vw, 210px);
+  font-size: clamp(36px, 10.5vw, 210px);
   line-height: 0.9;
   text-transform: uppercase;
   color: var(--mustard);
@@ -1870,6 +1870,63 @@ html.has-cursor textarea {
 .footer-note {
   font-size: 14px;
   opacity: 0.8;
+}
+.footer-credits {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 28px;
+  margin: 28px 0 12px;
+}
+/* Rubber stamp: double ink border, tilted, slightly worn. */
+.stamp {
+  padding: 10px 18px;
+  border: 4px double var(--ketchup);
+  border-radius: 10px;
+  color: var(--ketchup);
+  font-family: var(--font-display);
+  font-size: clamp(15px, 1.6vw, 20px);
+  text-transform: uppercase;
+  rotate: -4deg;
+  -webkit-mask-image: radial-gradient(rgb(0 0 0 / 0.75) 40%, #000 41%);
+  mask-image: radial-gradient(rgb(0 0 0 / 0.75) 40%, #000 41%);
+  -webkit-mask-size: 7px 7px;
+  mask-size: 7px 7px;
+}
+.stamp a {
+  color: var(--mustard);
+  text-decoration: underline wavy;
+  text-underline-offset: 4px;
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  font-weight: 800;
+}
+.footer-links a {
+  color: var(--paper);
+  text-underline-offset: 4px;
+}
+.footer-links a:hover {
+  color: var(--mustard);
+}
+.footer-links .footer-sticker {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 3px solid var(--paper);
+  border-radius: var(--wobble);
+  background: var(--mustard);
+  color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ketchup);
+  text-decoration: none;
+  rotate: 2deg;
+  transition: rotate 0.3s cubic-bezier(0.34, 1.8, 0.64, 1);
+}
+.footer-links .footer-sticker:hover {
+  color: var(--ink);
+  rotate: -3deg;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -174,7 +174,7 @@ export function locationSection(): HTMLElement {
         <div class="visit-card">
           <h3 class="visit-h">Find us</h3>
           <address>${esc(l.address)}<br>${esc(l.city)}</address>
-          <p><a class="link" href="tel:${esc(l.phone.replace(/\s/g, ''))}">${esc(l.phone)}</a></p>
+          <p><a class="link" href="tel:${esc(l.phone.replace(/[^\d+]/g, ''))}">${esc(l.phone)}</a></p>
           <a class="btn btn-primary" href="${esc(l.mapUrl)}" target="_blank" rel="noopener">Get directions</a>
         </div>
         <div class="receipt">
@@ -208,12 +208,21 @@ export function initLocation(root: HTMLElement): void {
 }
 
 export function footerSection(): HTMLElement {
-  const { brand, footer } = content;
+  const { brand, footer, credits } = content;
   const year = new Date().getFullYear();
+  const ext = 'target="_blank" rel="noopener"';
   return html(`
     <footer class="footer torn">
       <p class="footer-brand split" aria-hidden="true">${esc(brand.name)}</p>
       <p>${esc(brand.tagline)}</p>
+      <div class="footer-credits">
+        <p class="stamp">${esc(credits.prefix)} <a href="${esc(credits.url)}" ${ext}>${esc(credits.author)}</a></p>
+        <ul class="footer-links">
+          <li><a class="footer-sticker" href="${esc(credits.repo)}" ${ext}>${esc(credits.repoLabel)}</a></li>
+          <li><a href="${esc(credits.licenseUrl)}" ${ext}>${esc(credits.license)}</a></li>
+          <li><a href="${esc(credits.photoCreditsUrl)}" ${ext}>${esc(credits.photoCredits)}</a></li>
+        </ul>
+      </div>
       <p class="footer-note">${esc(footer.note)} &copy; ${year}</p>
     </footer>`);
 }
